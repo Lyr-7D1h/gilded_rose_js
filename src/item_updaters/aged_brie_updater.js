@@ -1,6 +1,6 @@
-const BasicItemDecayer = require("./basic_item_updater");
+const BasicItemUpdater = require("./basic_item_updater");
 
-class AgedBrieUpdater extends BasicItemDecayer {
+class AgedBrieUpdater extends BasicItemUpdater {
   getUpdateRatio() {
     return 1;
   }

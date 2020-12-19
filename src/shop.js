@@ -1,4 +1,4 @@
-const decayItem = require("./update_item");
+const updateItem = require("./update_item");
 
 class Shop {
   /**
@@ -15,7 +15,7 @@ class Shop {
    * Returns updated items
    */
   updateQuality() {
-    return this.items.forEach((item) => decayItem(item));
+    return this.items.forEach((item) => updateItem(item));
   }
 }
 

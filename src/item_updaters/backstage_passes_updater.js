@@ -1,6 +1,6 @@
-const BasicItemDecayer = require("./basic_item_updater");
+const BasicItemUpdater = require("./basic_item_updater");
 
-class BackstagePassesUpdater extends BasicItemDecayer {
+class BackstagePassesUpdater extends BasicItemUpdater {
   getNewQuality() {
     if (this.item.sellIn <= 0) return 0;
     return this.item.quality + 1 * this.getUpdateRatio();
