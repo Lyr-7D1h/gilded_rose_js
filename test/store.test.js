@@ -70,7 +70,6 @@ describe("Shop", () => {
       expect(getQuality()).toBe(qualityBefore + 1);
 
       shop.updateQuality();
-
       expect(getQuality()).toBe(qualityBefore + 1);
     });
   });
