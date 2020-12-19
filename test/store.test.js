@@ -23,6 +23,7 @@ describe("Shop", () => {
       shop.updateQuality();
       expect(getName()).toBe("This is an test");
     });
+
     it("degrades over time", () => {
       shop = createShop(createItem());
       const qualityBefore = getQuality();
@@ -39,7 +40,6 @@ describe("Shop", () => {
       const qualityBefore = getQuality();
       const sellInBefore = getSellIn();
 
-      // check for multiple updates
       shop.updateQuality();
       expect(getQuality()).toBe(qualityBefore - 2);
       expect(getSellIn()).toBe(sellInBefore - 1);
@@ -143,6 +143,17 @@ describe("Shop", () => {
 
       expect(getSellIn()).toBe(2);
       expect(getQuality()).toBe(8);
+    });
+  });
+
+  describe("Conjured", () => {
+    it("degrades 2 times as fast", () => {
+      shop = createShop(createItem("Conjured"));
+      const qualityBefore = getQuality();
+
+      shop.updateQuality();
+
+      expect(getQuality()).toBe(qualityBefore - 2);
     });
   });
 });
