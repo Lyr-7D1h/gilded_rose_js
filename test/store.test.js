@@ -1,4 +1,6 @@
-const { Shop, Item } = require("../src/gilded_rose");
+// const { Shop, Item } = require("../src/gilded_rose");
+const Shop = require("../src/shop");
+const Item = require("../src/item");
 
 describe("Shop", () => {
   let shop;
@@ -16,6 +18,11 @@ describe("Shop", () => {
   const getSellIn = (index = 0) => shop.items[index].sellIn;
 
   describe("Basic items", () => {
+    it("names stays the same", () => {
+      shop = createShop(createItem("This is an test"));
+      shop.updateQuality();
+      expect(getName()).toBe("This is an test");
+    });
     it("degrades over time", () => {
       shop = createShop(createItem());
       const qualityBefore = getQuality();
@@ -39,7 +46,9 @@ describe("Shop", () => {
     });
 
     it("quality can't be less than 0", () => {
-      shop = createShop(createItem("Test", 0, 0));
+      shop = createShop(createItem("Test", 1, 0));
+      shop.updateQuality();
+      expect(getQuality()).toBe(0);
       shop.updateQuality();
       expect(getQuality()).toBe(0);
     });
@@ -84,6 +93,16 @@ describe("Shop", () => {
   });
 
   describe("Backstage passes", () => {
+    it("quality does not go above 50", () => {
+      shop = createShop(
+        createItem("Backstage passes to a TAFKAL80ETC concert", 5, 49)
+      );
+      const qualityBefore = getQuality();
+
+      shop.updateQuality();
+      expect(getQuality()).toBe(qualityBefore + 1);
+    });
+
     it("quality drops to 0 after sellIn is less than 0", () => {
       shop = createShop(
         createItem("Backstage passes to a TAFKAL80ETC concert", 0, 8)
